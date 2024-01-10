@@ -20,8 +20,7 @@ Resources:
       ConfigFile: environments/dev/main.stack.yaml
       RepositoryLinkId: !Ref RepositoryLinkId
       ResourceName: dev-main
-      RoleArn:
-        Fn::ImportValue: Bearse-GithubCfnSync-Role
+      RoleArn: arn:aws:iam::088071013352:role/GitCfnSyncRole
       SyncType: CFN_STACK_SYNC
 
 
