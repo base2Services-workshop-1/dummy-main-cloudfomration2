@@ -1,0 +1,8 @@
+template-file-path: ./stacks/templates/stack-sync-deployments.yaml
+
+parameters:
+  RepositoryOwner: base2Services-workshop-1
+  RepositoryName: dummy-main-cloudfomration2
+
+tags:
+  account: 'dev'
