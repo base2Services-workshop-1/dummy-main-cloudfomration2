@@ -1,0 +1,58 @@
+AWSTemplateFormatVersion: 2010-09-09
+# Transform: Base2GitSync
+Parameters:
+  StackList:
+    Description: List of stacks to deploy
+    Type: CommaDelimitedList
+    Default: ''
+  RepositoryOwner:
+    Description: Github Owner
+    Type: String
+  RepositoryName:
+    Description: Github Repository Name
+    Type: String
+
+Resources:
+
+  MainRepositoryLink:
+    Type: AWS::CodeStarConnections::RepositoryLink
+    Properties:
+      ConnectionArn:
+        Fn::ImportValue: Bearse-GithubCfnSync-Connection
+        OwnerId: !Ref RepositoryOwner
+        RepositoryName: !Ref RepositoryName
+
+  MainSyncConfiguration:
+    Type: AWS::CodeStarConnections::SyncConfiguration
+    Properties:
+      Branch: main
+      ConfigFile: environments/dev/main.stack.yaml
+      RepositoryLinkId: !Ref MainRepositoryLink
+      ResourceName: dev-main
+      RoleArn:
+        Fn::ImportValue: Bearse-GithubCfnSync-Role
+      SyncType: CFN_STACK_SYNC
+
+
+    # DevMain:
+  #   Type: Base2GitSync::Stack
+  #   Properties:
+  #     StackName: dev-main
+  #     GitConnectionArn: 
+  #       Fn::ImportValue: Bearse-GithubCfnSync-Connection
+  #     OwnerId: !Ref RepositoryOwner
+  #     RepositoryName: !Ref RepositoryName
+  #     SyncBranch: main
+  #     DeploymentFile: environments/dev/main.stack.yml
+
+
+  # 'Fn::ForEach::Stacks':
+  #   - StackName
+  #   - !Ref StackList
+  #   - 'RepositoryLink${StackName}':
+  #       Type: AWS::CodeStarConnections::RepositoryLink
+  #       Properties:
+  #         ConnectionArn: 
+  #           Fn::ImportValue: Bearse-GithubCfnSync-Connection
+  #         OwnerId: !Ref RepositoryOwner
+  #         RepositoryName: !Ref RepositoryName
