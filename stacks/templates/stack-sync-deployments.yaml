@@ -15,8 +15,8 @@ Resources:
     Properties:
       ConnectionArn:
         Fn::ImportValue: Bearse-GithubCfnSync-Connection
-        OwnerId: !Ref RepositoryOwner
-        RepositoryName: !Ref RepositoryName
+      OwnerId: !Ref RepositoryOwner
+      RepositoryName: !Ref RepositoryName
 
   MainSyncConfiguration:
     Type: AWS::CodeStarConnections::SyncConfiguration
