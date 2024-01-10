@@ -7,23 +7,18 @@ Parameters:
   RepositoryName:
     Description: Github Repository Name
     Type: String
+  RepositoryLinkId:
+    Description: Github Repository Name
+    Type: String
 
 Resources:
-
-  MainRepositoryLink:
-    Type: AWS::CodeStarConnections::RepositoryLink
-    Properties:
-      ConnectionArn:
-        Fn::ImportValue: Bearse-GithubCfnSync-Connection
-      OwnerId: !Ref RepositoryOwner
-      RepositoryName: !Ref RepositoryName
 
   MainSyncConfiguration:
     Type: AWS::CodeStarConnections::SyncConfiguration
     Properties:
       Branch: main
       ConfigFile: environments/dev/main.stack.yaml
-      RepositoryLinkId: !Ref MainRepositoryLink
+      RepositoryLinkId: !Ref RepositoryLinkId
       ResourceName: dev-main
       RoleArn:
         Fn::ImportValue: Bearse-GithubCfnSync-Role

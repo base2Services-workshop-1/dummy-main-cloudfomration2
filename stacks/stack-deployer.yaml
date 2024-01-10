@@ -3,6 +3,7 @@ template-file-path: ./stacks/templates/stack-sync-deployments.yaml
 parameters:
   RepositoryOwner: base2Services-workshop-1
   RepositoryName: dummy-main-cloudfomration2
+  RepositoryLinkId: 17d2d201-d53d-4c29-aa52-93cff756faf1
 
 tags:
   account: 'dev'
