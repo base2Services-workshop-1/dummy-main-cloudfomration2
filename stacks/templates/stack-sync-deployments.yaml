@@ -1,10 +1,6 @@
 AWSTemplateFormatVersion: 2010-09-09
 # Transform: Base2GitSync
 Parameters:
-  StackList:
-    Description: List of stacks to deploy
-    Type: CommaDelimitedList
-    Default: ''
   RepositoryOwner:
     Description: Github Owner
     Type: String
